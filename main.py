@@ -26,9 +26,9 @@ def modify_doc(doc):
     import numpy as np
     import pandas as pd
 
-    x = np.linspace(0,2*np.pi,1000)
+    x = np.linspace(0,10*np.pi,1000)
     noise = np.random.normal(0,0.1,1000)
-    y = np.sin(x) + noise
+    y = 2*np.sin(x)/x + noise
     df = pd.DataFrame({'x':x,'y':y})
     # df = sea_surface_temperature.copy()
     source = ColumnDataSource(data=df)
@@ -37,7 +37,7 @@ def modify_doc(doc):
     #               title="Sea Surface Temperature at 43.18, -70.43")
     # plot.line('time', 'temperature', source=source)
 
-    plot = figure(x_axis_label='Time',y_axis_label='Amplitude', y_range=(-1.5, 1.5))
+    plot = figure(x_axis_label='Time',y_axis_label='Amplitude', y_range=(-0.5, 2.5))
     plot.line('x','y',source=source)
 
     def callback(attr, old, new):
