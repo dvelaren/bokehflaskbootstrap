@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1 class="mt-5">Bokeh Plot</h1>
+    <p class="lead">This Bokeh app below served by a Bokeh server that has been embedded
+    in another web app framework. For more information see the section
+    <a target="_blank"
+        href="https://bokeh.pydata.org/en/latest/docs/user_guide/server.html#embedding-bokeh-server-as-a-library">Embedding
+        Bokeh Server as a Library</a> in the User's Guide.
+    </p>
+    {{ script|safe }}
+{% endblock content %}

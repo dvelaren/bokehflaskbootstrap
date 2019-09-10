@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/rapidminer/Projects/bokeh_embed_test/venv"
+VIRTUAL_ENV="/home/david/Projects/bokehflaskbootstrap/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

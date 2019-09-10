@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/rapidminer/Projects/bokeh_embed_test/venv/bin/python3.7"
+    "python.pythonPath": "venv/bin/python",
+    "git.ignoreLimitWarning": true
 }
