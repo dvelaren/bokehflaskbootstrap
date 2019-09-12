@@ -3,6 +3,8 @@ try:
 except ImportError:
     raise RuntimeError("This example requries Python3 / asyncio")
 
+import logging
+
 from flask import Flask, render_template, url_for
 
 from tornado.httpserver import HTTPServer
@@ -28,7 +30,7 @@ def modify_doc(doc):
 
     x = np.linspace(0,10*np.pi,1000)
     noise = np.random.normal(0,0.1,1000)
-    y = 2*np.sin(x)/x + noise
+    y = 2*np.sin(x) + noise
     df = pd.DataFrame({'x':x,'y':y})
     # df = sea_surface_temperature.copy()
     source = ColumnDataSource(data=df)
@@ -61,17 +63,17 @@ bkapp = Application(FunctionHandler(modify_doc))
 
 # This is so that if this app is run using something like "gunicorn -w 4" then
 # each process will listen on its own port
-sockets, port = bind_sockets("127.0.0.1", 0)
+sockets, port = bind_sockets("0.0.0.0", 0)
 
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template("index.html")
 
-@app.route('/graph')
+@app.route('/graph', methods=['GET'])
 def graph():
     # script = server_document('http://localhost:5006/bkapp')
-    script = server_document('http://localhost:%d/bkapp' % port)
+    script = server_document('http://siseflask.dis.eafit.edu.co:%d/bkapp' % port)
     return render_template("graph.html", script=script, template="Flask")
 
 def bk_worker():
@@ -82,7 +84,7 @@ def bk_worker():
     # server.io_loop.start()
     asyncio.set_event_loop(asyncio.new_event_loop())
 
-    bokeh_tornado = BokehTornado({'/bkapp': bkapp}, extra_websocket_origins=["localhost:8000","0.0.0.0:8000","0.0.0.0:5000","localhost:5000"])
+    bokeh_tornado = BokehTornado({'/bkapp': bkapp}, extra_websocket_origins=["127.0.0.1:5000","localhost:5000","0.0.0.0:5000","192.168.10.130","siseflask.dis.eafit.edu.co"])
     bokeh_http = HTTPServer(bokeh_tornado)
     bokeh_http.add_sockets(sockets)
 
@@ -94,8 +96,26 @@ from threading import Thread
 Thread(target=bk_worker).start()
 
 if __name__ == '__main__':
-    print('Opening single process Flask app with embedded Bokeh application on http://localhost:8000/')
+    print('Opening single process Flask app with embedded Bokeh application on http://localhost:5000/')
     print()
     print('Multiple connections may block the Bokeh app in this configuration!')
     print('See "flask_gunicorn_embed.py" for one way to run multi-process')
-    app.run(port=8000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
+# else:
+	# gunicorn_logger = logging.getLogger('gunicorn.error')
+	# gunicorn_logger.setLevel(logging.INFO)
+	
+	# tornado_access_logger = logging.getLogger('tornado.access')
+	# tornado_access_logger.setLevel(logging.INFO)
+	# tornado_access_handler = logging.FileHandler('logs/error_log.log')
+	# tornado_access_logger.addHandler(tornado_access_handler)
+
+	# tornado_application_logger = logging.getLogger('tornado.application')
+	# tornado_application_logger.setLevel(logging.INFO)
+	# tornado_application_handler = logging.FileHandler('logs/error_log.log')
+	# tornado_application_logger.addHandler(tornado_application_handler)
+
+	# app.logger.addHandler(gunicorn_logger.handlers)
+	# app.logger.addHandler(tornado_access_logger.handlers)
+	# app.logger.addHandler(tornado_application_logger.handlers)
+	# app.logger.setLevel(logging.INFO)

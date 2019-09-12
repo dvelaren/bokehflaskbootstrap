@@ -1,4 +1,4 @@
-#!/home/david/Projects/bokehflaskbootstrap/venv/bin/python3
+#!/home/dvelas25/bokehflaskbootstrap/venv/bin/python3
 # EASY-INSTALL-ENTRY-SCRIPT: 'bokeh==1.3.4','console_scripts','bokeh'
 __requires__ = 'bokeh==1.3.4'
 import re

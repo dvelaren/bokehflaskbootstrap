@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/david/Projects/bokehflaskbootstrap/venv"
+VIRTUAL_ENV="/home/dvelas25/bokehflaskbootstrap/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
