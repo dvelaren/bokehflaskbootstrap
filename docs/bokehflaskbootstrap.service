@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve bokehflaskbootstrap
+After=network.target
+
+[Service]
+User=dvelasquez
+Group=www-data
+WorkingDirectory=/home/dvelasquez/bokehflaskbootstrap
+Environment="PATH=/home/dvelasquez/bokehflaskbootstrap/venv/bin"
+ExecStart=/home/dvelasquez/bokehflaskbootstrap/venv/bin/gunicorn --workers 2 --bind unix:bokehflaskbootstrap.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
