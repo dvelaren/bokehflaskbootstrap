@@ -15,18 +15,22 @@ Thread(target=bk_worker).start()
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("index.html")
+    script = server_document(url=r'/bkapp/todos', relative_urls=True)
+    # script = server_document('http://localhost:5006/bkapp')
+    # script = server_document('http://siseflask.dis.eafit.edu.co:%d/bkapp' % port) # flask_gunicorn_embed.py
+    return render_template("graph.html", script=script, template="Flask")
+    # return render_template("index.html")
 
-@app.route('/graph1', methods=['GET'])
+@app.route('/pieza', methods=['GET'])
 def graph1():
-    script = server_document(url=r'/bkapp/app1', relative_urls=True)
+    script = server_document(url=r'/bkapp/pieza', relative_urls=True)
     # script = server_document('http://localhost:5006/bkapp')
     # script = server_document('http://siseflask.dis.eafit.edu.co:%d/bkapp' % port) # flask_gunicorn_embed.py
     return render_template("graph.html", script=script, template="Flask")
 
-@app.route('/graph2', methods=['GET'])
+@app.route('/sala', methods=['GET'])
 def graph2():
-    script = server_document(url=r'/bkapp/app2', relative_urls=True)
+    script = server_document(url=r'/bkapp/sala', relative_urls=True)
     # script = server_document('http://localhost:5006/bkapp')
     # script = server_document('http://siseflask.dis.eafit.edu.co:%d/bkapp' % port) # flask_gunicorn_embed.py
     return render_template("graph.html", script=script, template="Flask")

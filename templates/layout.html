@@ -8,14 +8,14 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-  <title>Embedding a Bokeh Server With {{ framework }}</title>
+  <title>Flask-Bokeh IoT</title>
 </head>
 
 <body>
   <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
       <div class="container">
-        <a class="navbar-brand mr-4" href="/">Flask Bokeh</a>
+        <a class="navbar-brand mr-4" href="/">Flask-Bokeh IoT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,8 +23,8 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-            <a class="nav-item nav-link" href="{{ url_for('graph1') }}">Graph 1</a>
-            <a class="nav-item nav-link" href="{{ url_for('graph2') }}">Graph 2</a>
+            <a class="nav-item nav-link" href="{{ url_for('graph1') }}">Pieza</a>
+            <a class="nav-item nav-link" href="{{ url_for('graph2') }}">Sala</a>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
   <!-- Main Content -->
   <main role="main" class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-xs-9 col-md-12">
         {% block content %}{% endblock %}
       </div>
     </div>
